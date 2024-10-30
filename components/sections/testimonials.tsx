@@ -31,7 +31,7 @@ const testimonials = [
     text: "Working together was an absolute pleasure. Exceptional technical skills and unwavering attention to detail resulted in a product that surpassed all expectations.",
   },
   {
-    name: "Piyush Kumar",
+    name: "Piyush Singh",
     role: "Backend Developer",
     image: "https://media.licdn.com/dms/image/v2/D4D03AQET42pxBF9zPA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1670591772642?e=1735776000&v=beta&t=ikFSekWYVe7c5A28Ief30cNn41QiEXOBI-TXpJiXk0Y",
     text: "The experience was remarkable. Technical proficiency and keen attention to detail led to a product that not only met but exceeded expectations.",
