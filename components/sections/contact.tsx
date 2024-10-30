@@ -10,17 +10,41 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 export function ContactSection() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    toast.success("Message sent successfully!");
-    setIsSubmitting(false);
+
+    try {
+      const response = await fetch("/api/message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!response.ok) {
+        toast.error("Error to send message");
+        throw new Error("Failed to send message");
+      }
+
+       await response.json(); 
+
+      toast.success("Message sent successfully!");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+      console.error(error); 
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -49,6 +73,8 @@ export function ContactSection() {
                 placeholder="Your Name"
                 required
                 className="w-full"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </motion.div>
             <motion.div
@@ -62,6 +88,8 @@ export function ContactSection() {
                 placeholder="Your Email"
                 required
                 className="w-full"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </motion.div>
             <motion.div
@@ -74,6 +102,8 @@ export function ContactSection() {
                 placeholder="Your Message"
                 required
                 className="w-full min-h-[150px]"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </motion.div>
             <motion.div
