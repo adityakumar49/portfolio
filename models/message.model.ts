@@ -11,7 +11,8 @@ const userMessage=new Schema({
         type:String,
         required:true,
         minlength:5,
-        maxlength:100,        
+        maxlength:100,  
+        match:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/      
     },
     message:{
         type:String,
