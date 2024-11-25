@@ -15,8 +15,29 @@ export function ContactSection() {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const validateForm = () => {
+    if (name.trim().length < 3) {
+      toast.error("Name must be at least 3 characters long.");
+      return false;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return false;
+    }
+
+    if (message.trim().length < 10) {
+      toast.error("Message must be at least 10 characters long.");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) return;
     setIsSubmitting(true);
 
     try {
